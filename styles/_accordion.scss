@@ -21,6 +21,15 @@
     justify-content: space-between;
     align-items: center;
     transition: background-color var(--transition);
+    border-bottom: 4px solid var(--senary-color);
+
+    &--closed {
+      background-color: var(--primary-color);
+    }
+
+    &--open {
+      background-color: var(--secondary-color);
+    }
 
     &:hover {
       background-color: var(--secondary-color);

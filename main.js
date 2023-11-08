@@ -10,12 +10,16 @@ const fetchData = async () => {
     const data = await resp.json();
     const accordion = document.querySelector(".accordion");
 
-    const openPanel = (panel) => {
+    const openPanel = (panel, trigger) => {
       panel.style.maxHeight = panel.scrollHeight + "px";
+      trigger.classList.add("accordion__trigger--open");
+      trigger.classList.remove("accordion__trigger--closed");
     };
 
-    const closePanel = (panel) => {
+    const closePanel = (panel, trigger) => {
       panel.style.maxHeight = null;
+      trigger.classList.remove("accordion__trigger--open");
+      trigger.classList.add("accordion__trigger--closed");
     };
 
     data.blocks.forEach((section, index) => {
@@ -24,7 +28,7 @@ const fetchData = async () => {
 
       const header = document.createElement("h2");
       const trigger = document.createElement("button");
-      trigger.classList.add("accordion__trigger");
+      trigger.classList.add("accordion__trigger", "accordion__trigger--closed");
       trigger.textContent = section.heading;
 
       const panel = document.createElement("div");
@@ -36,7 +40,7 @@ const fetchData = async () => {
 
       trigger.addEventListener("click", () => {
         if (panel.style.maxHeight) {
-          closePanel(panel);
+          closePanel(panel, trigger);
         } else {
           // If the panel is closed, open it and close other open panels
           data.blocks.forEach((_, otherIndex) => {
@@ -44,13 +48,18 @@ const fetchData = async () => {
               closePanel(
                 accordion.children[otherIndex].querySelector(
                   ".accordion__panel"
+                ),
+                accordion.children[otherIndex].querySelector(
+                  ".accordion__trigger"
                 )
               );
             }
           });
-          openPanel(panel);
+          openPanel(panel, trigger);
         }
       });
+
+      //   Create elements for accordion
 
       accordion.appendChild(accordionSection);
       accordionSection.appendChild(header);
