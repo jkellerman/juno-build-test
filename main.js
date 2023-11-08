@@ -6,7 +6,7 @@ const ACCORDION_PANEL_CLASS = "accordion__panel";
 
 const fetchData = async () => {
   try {
-    const resp = await fetch("data.json");
+    const resp = await fetch("/data.json");
     if (!resp.ok) {
       throw new Error("Network response was not ok");
     }
