@@ -31,6 +31,11 @@ const fetchData = async () => {
       trigger.classList.add("accordion__trigger", "accordion__trigger--closed");
       trigger.textContent = section.heading;
 
+      const chevron = document.createElement("span");
+      chevron.classList.add("chevron");
+      chevron.innerHTML =
+        '<svg id="Layer_1" height="20" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"><path d="m12 18a1.021 1.021 0 0 1 -.707-.293l-10-10a1 1 0 0 1 1.414-1.414l9.293 9.293 9.293-9.293a1 1 0 1 1 1.414 1.414l-10 10a1.021 1.021 0 0 1 -.707.293z"/></svg>';
+
       const panel = document.createElement("div");
       panel.classList.add("accordion__panel");
 
@@ -64,6 +69,7 @@ const fetchData = async () => {
       accordion.appendChild(accordionSection);
       accordionSection.appendChild(header);
       header.appendChild(trigger);
+      trigger.appendChild(chevron);
       accordionSection.appendChild(panel);
       panel.appendChild(content);
     });
