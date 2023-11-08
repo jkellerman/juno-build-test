@@ -12,9 +12,8 @@ const fetchData = async () => {
 
     data.blocks.forEach((section) => {
       const accordionSection = document.createElement("div");
-      accordionSection.classList.add("accordion_item");
+      accordionSection.classList.add("accordion__section");
 
-      // For accordion header, wrap button in heading
       const header = document.createElement("h2");
       const trigger = document.createElement("button");
       trigger.classList.add("accordion__trigger");
