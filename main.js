@@ -1,5 +1,9 @@
 import "./styles/main.scss";
 
+const ACCORDION_SECTION_CLASS = "accordion__section";
+const ACCORDION_TRIGGER_CLASS = "accordion__trigger";
+const ACCORDION_PANEL_CLASS = "accordion__panel";
+
 const fetchData = async () => {
   try {
     const resp = await fetch("data.json");
@@ -12,26 +16,29 @@ const fetchData = async () => {
 
     const openPanel = (panel, trigger) => {
       panel.style.maxHeight = panel.scrollHeight + "px";
-      trigger.classList.add("accordion__trigger--open");
-      trigger.classList.remove("accordion__trigger--closed");
+      trigger.classList.add(`${ACCORDION_TRIGGER_CLASS}--open`);
+      trigger.classList.remove(`${ACCORDION_TRIGGER_CLASS}--closed`);
       trigger.setAttribute("aria-expanded", true);
     };
 
     const closePanel = (panel, trigger) => {
       panel.style.maxHeight = null;
-      trigger.classList.remove("accordion__trigger--open");
-      trigger.classList.add("accordion__trigger--closed");
+      trigger.classList.remove(`${ACCORDION_TRIGGER_CLASS}--open`);
+      trigger.classList.add(`${ACCORDION_TRIGGER_CLASS}--closed`);
       trigger.setAttribute("aria-expanded", false);
     };
 
     data.blocks.forEach((section, index) => {
       const accordionSection = document.createElement("div");
-      accordionSection.classList.add("accordion__section");
+      accordionSection.classList.add(`${ACCORDION_SECTION_CLASS}`);
 
       const header = document.createElement("h2");
       const trigger = document.createElement("button");
       trigger.id = `accordion${index + 1}`;
-      trigger.classList.add("accordion__trigger", "accordion__trigger--closed");
+      trigger.classList.add(
+        `${ACCORDION_TRIGGER_CLASS}`,
+        `${ACCORDION_TRIGGER_CLASS}--closed`
+      );
       trigger.textContent = section.heading;
 
       const chevron = document.createElement("span");
@@ -41,7 +48,7 @@ const fetchData = async () => {
 
       const panel = document.createElement("div");
       panel.id = `panel${index + 1}`;
-      panel.classList.add("accordion__panel");
+      panel.classList.add(`${ACCORDION_PANEL_CLASS}`);
 
       const content = document.createElement("p");
       content.classList.add("accordion__content");
@@ -72,10 +79,10 @@ const fetchData = async () => {
             if (otherIndex !== index) {
               closePanel(
                 accordion.children[otherIndex].querySelector(
-                  ".accordion__panel"
+                  `.${ACCORDION_PANEL_CLASS}`
                 ),
                 accordion.children[otherIndex].querySelector(
-                  ".accordion__trigger"
+                  `.${ACCORDION_TRIGGER_CLASS}`
                 )
               );
             }
