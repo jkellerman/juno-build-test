@@ -1,9 +1,10 @@
 .accordion {
   max-width: 575px;
+  margin-top: 1rem;
 
   .accordion__section {
     border: 1px solid var(--quaternary-color);
-    margin: 0.75rem;
+    margin-bottom: 0.75rem;
   }
 
   .accordion__trigger {
@@ -25,6 +26,13 @@
       background-color: var(--secondary-color);
     }
   }
+
+  .accordion__panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition);
+  }
+
   .accordion__content {
     padding: 0.75rem;
     color: var(--tertiary-color);

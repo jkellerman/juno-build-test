@@ -10,7 +10,15 @@ const fetchData = async () => {
     const data = await resp.json();
     const accordion = document.querySelector(".accordion");
 
-    data.blocks.forEach((section) => {
+    const openPanel = (panel) => {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    };
+
+    const closePanel = (panel) => {
+      panel.style.maxHeight = null;
+    };
+
+    data.blocks.forEach((section, index) => {
       const accordionSection = document.createElement("div");
       accordionSection.classList.add("accordion__section");
 
@@ -25,6 +33,24 @@ const fetchData = async () => {
       const content = document.createElement("p");
       content.classList.add("accordion__content");
       content.textContent = section.content;
+
+      trigger.addEventListener("click", () => {
+        if (panel.style.maxHeight) {
+          closePanel(panel);
+        } else {
+          // If the panel is closed, open it and close other open panels
+          data.blocks.forEach((_, otherIndex) => {
+            if (otherIndex !== index) {
+              closePanel(
+                accordion.children[otherIndex].querySelector(
+                  ".accordion__panel"
+                )
+              );
+            }
+          });
+          openPanel(panel);
+        }
+      });
 
       accordion.appendChild(accordionSection);
       accordionSection.appendChild(header);
