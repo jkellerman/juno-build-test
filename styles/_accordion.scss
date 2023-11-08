@@ -1,0 +1,32 @@
+.accordion {
+  max-width: 575px;
+
+  .accordion__section {
+    border: 1px solid var(--quaternary-color);
+    margin: 0.75rem;
+  }
+
+  .accordion__trigger {
+    background-color: var(--primary-color);
+    color: var(--quinary-color);
+    padding: 1rem 0.75rem;
+    border: none;
+    width: 100%;
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color var(--transition);
+
+    &:hover {
+      background-color: var(--secondary-color);
+    }
+  }
+  .accordion__content {
+    padding: 0.75rem;
+    color: var(--tertiary-color);
+  }
+}
